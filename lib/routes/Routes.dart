@@ -11,7 +11,7 @@ final routes = {
   '/product' : (context) => ProductPage(),
   '/productinfo': (context,{arguments})=> ProductInfoPage(arguments: arguments,)
  };
-
+//arguments
 var onGenerateRoute = (RouteSettings settings){
     final String name = settings.name;
     final Function pageContentBuilder = routes[name];
