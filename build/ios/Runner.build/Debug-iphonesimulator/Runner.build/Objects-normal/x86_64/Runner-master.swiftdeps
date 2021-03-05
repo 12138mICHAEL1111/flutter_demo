@@ -1,5 +1,0 @@
-version: "Apple Swift version 5.4 (swiftlang-1205.0.24.6 clang-1205.0.19.54)"
-options: "50de6ecb15ce02325e875d9993f4c1d7"
-build_time: [1613654700, 57446000]
-inputs:
-  "/Users/apple/Desktop/flutterdemo/flutter_demo/ios/Runner/AppDelegate.swift": [1613641208, 839494187]

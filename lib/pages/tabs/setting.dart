@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 
 class SettingPage extends StatefulWidget {
@@ -10,12 +11,18 @@ class SettingPage extends StatefulWidget {
 class _SettingPageState extends State<SettingPage> {
   @override
   Widget build(BuildContext context) {
-    return ListView(
+    return Column(
        children: <Widget>[
-         ListTile(
-           title: Text("我是文本"),
-        )
+        Column(
+          children: <Widget>[
+             ListTile(
+              title: Text("我是文本"),
+            ),
+          ],
+        ),
+        
        ],
+    
     );
   }
 }
