@@ -24,9 +24,11 @@ class _SettingPageState extends State<StopSignIn> {
   //所以涉及到文件 数据库写入读取的操作包括接口调用必须加await方法让他先执行完，再去执行下面的
   //具体方面是在函数名字后加上async， 方法前加上await
   //具体可百度 bilibili
+  //注册方法
   doRegister() async{
     //字面意思
     if(password.length<6){
+      //flutter的错误提示框
       Fluttertoast.showToast(
           msg: 'password cannot be less than 6 digits',
           toastLength:Toast.LENGTH_SHORT,
@@ -46,8 +48,11 @@ class _SettingPageState extends State<StopSignIn> {
       //重要！ 重要！
       //自定义的注册接口
       //没后端代码点不了 但还是要看下
+      //Dio为http请求库 可执行get post等操作
+      //{"email":this.email,"password":this.password}为参数发送给服务器
       //如果邮箱被注册 返回的response 为{"message":"email has been registered"}
       //如果没有{"Token":xxx,"email":xxx,"message":"success"}
+      //192.168.50.16:3000为我的ipv4地址
       //xxx是在服务器中定义的变量
         var api = 'http://192.168.50.16:3000/stop/api/signin';
         var response = await Dio().post(api,data:{"email":this.email,"password":this.password});

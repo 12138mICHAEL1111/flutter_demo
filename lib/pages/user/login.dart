@@ -18,14 +18,11 @@ class _SettingPageState extends State<LoginPage> {
   String email;
   String password;
   login() async{
-    //post接口 是我自定义的接口 192.168.50.16是我的ipv4地址
      var api = 'http://192.168.50.16:3000/stop/api/login';
      //response是post返回的数据 可以print response.data下看下返回什么，密码错误，找不到账号，登陆成功返回的是不一样的
-     //data:{"email":this.email,"password":this.password}是post的参数 传给服务器的
      var response = await Dio().post(api,data:{"email":this.email,"password":this.password});
      var message = response.data["message"];
      if(message=="cannot find this email address"){
-       //flutter的错误提示框
         Fluttertoast.showToast(
           msg: message,
           toastLength:Toast.LENGTH_SHORT,
