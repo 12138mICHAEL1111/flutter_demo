@@ -11,7 +11,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   bool isLogin = false;
-  String userEmail = "";
+  String userid = "";
   @override
   void initState() { 
     super.initState();
@@ -21,9 +21,9 @@ class _HomePageState extends State<HomePage> {
     // 看services/UserServices.dart
     // 一般登陆才会用到 
     var isLogin = await UserServices.getUserState();
-    var userEmail = await UserServices.getUserInfo();
+    var userid = await UserServices.getUserInfo();
     setState((){
-      this.userEmail=userEmail;
+      this.userid=userid;
       this.isLogin = isLogin;  
       }
     );
@@ -36,7 +36,7 @@ class _HomePageState extends State<HomePage> {
         children: <Widget>[
           //如果没登陆 展示登陆注册按钮
           //如果登陆了，展示当前邮箱和注销按钮 
-          !this.isLogin?RaisedButton(
+          !this.isLogin?RaisedButton(    
               child: Text("登陆注册"),
               onPressed: () {
                 Navigator.pushNamed(context, '/login');
@@ -50,7 +50,7 @@ class _HomePageState extends State<HomePage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     //展示当前的登陆的用户的邮箱
-                    Text("email: ${this.userEmail}",
+                    Text("email: ${this.userid}",
                     style: TextStyle(
                       fontSize:  18
                     )),
@@ -62,7 +62,6 @@ class _HomePageState extends State<HomePage> {
                            UserServices.logOut();    
                            this.isLogin=false;   
                         });
-                        
                       },
                     )
                   ],

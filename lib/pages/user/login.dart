@@ -15,14 +15,17 @@ class LoginPage extends StatefulWidget {
 }
 
 class _SettingPageState extends State<LoginPage> {
-  String email;
+  String id;
   String password;
   login() async{
-     var api = 'http://192.168.50.16:3000/stop/api/login';
+      var api = 'http://192.168.50.16:3000/stop/api/rest/users/login';
+      //var api = 'http://192.168.50.16:3000/stop/api/rest/users/signup';
+      // var response = await Dio().get(api);
+      // print(response.data[17]["blank"]);
      //response是post返回的数据 可以print response.data下看下返回什么，密码错误，找不到账号，登陆成功返回的是不一样的
-     var response = await Dio().post(api,data:{"email":this.email,"password":this.password});
+      var response = await Dio().post(api,data:{"userid":this.id,"password":this.password});   
      var message = response.data["message"];
-     if(message=="cannot find this email address"){
+     if(message=="cannot find this id"){
         Fluttertoast.showToast(
           msg: message,
           toastLength:Toast.LENGTH_SHORT,
@@ -43,13 +46,13 @@ class _SettingPageState extends State<LoginPage> {
           gravity:ToastGravity.CENTER
          );
          SharedPreferences pref = await SharedPreferences.getInstance();
-           pref.setString('Email',json.encode(response.data['email']));
+           pref.setString('userid',json.encode(response.data['userid']));
            //登陆成功跳转到主界面
           Navigator.of(context).pushAndRemoveUntil(
             new MaterialPageRoute(builder: (context)=>new Tabs()),
             (route) => route == null);
       }
-      }
+       }
   
   
   @override
@@ -91,9 +94,9 @@ class _SettingPageState extends State<LoginPage> {
         //用于代码模块化
         //text和onchanged是传入的参数
         InputText(
-          text:"Please input email",
+          text:"Please input id",
           onChanged: (value){
-            this.email = value;
+            this.id = value;
           },
         ),
         SizedBox(height: 10,),
@@ -111,7 +114,12 @@ class _SettingPageState extends State<LoginPage> {
             children: <Widget>[
               Align(
                 alignment: Alignment.centerLeft,
-                child: Text('忘记密码')),
+                child: InkWell(
+                  onTap: (){
+                    Navigator.pushNamed(context,'/resetpassword');
+                  },
+                  child: Text('忘记密码'),
+                )),
                 Align(
                 alignment: Alignment.centerRight,
                 child:InkWell(

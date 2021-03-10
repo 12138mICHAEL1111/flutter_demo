@@ -54,8 +54,9 @@ class _SettingPageState extends State<StopSignIn> {
       //如果没有{"Token":xxx,"email":xxx,"message":"success"}
       //192.168.50.16:3000为我的ipv4地址
       //xxx是在服务器中定义的变量
-        var api = 'http://192.168.50.16:3000/stop/api/signin';
+        var api = 'http://192.168.50.16:3000/stop/api/rest/users/signup';
         var response = await Dio().post(api,data:{"email":this.email,"password":this.password});
+        print(response.data);
         if(response.data["message"]=='success'){
           //SharedPreferences是本地储存的轻量数据，用于验证登陆状态之类的
           //类似于map的储存类型，会把数据储存在本地
@@ -68,7 +69,7 @@ class _SettingPageState extends State<StopSignIn> {
       }
       else{
        Fluttertoast.showToast(
-          msg: '${response.data["message"]}',
+          msg: 'email has been registered',
           toastLength:Toast.LENGTH_SHORT,
           gravity:ToastGravity.CENTER
          );
@@ -117,6 +118,7 @@ class _SettingPageState extends State<StopSignIn> {
             this.rPassword=value;
           },
         ),
+       
           Btn(text:"sign in",
               color: Colors.red,
               height: 74,

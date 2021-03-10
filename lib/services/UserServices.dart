@@ -2,22 +2,22 @@ import 'package:shared_preferences/shared_preferences.dart';
  
 
 class UserServices{
-  //读取SharedPreferences本地储存的 key Email
+  //读取SharedPreferences本地储存的key: Email
   static getUserInfo() async{
-    String userEmail;
+    String userid;
     try{
       SharedPreferences pref = await SharedPreferences.getInstance();
-      String email = pref.getString('Email');
-      userEmail = email;
+      String id = pref.getString('userid');
+      userid = id;
     }catch(e){   
     }
-    return userEmail;
+    return userid;
   }
 
   //如果有useremail login状态为true
   static getUserState() async{
-    var userEmail = await UserServices.getUserInfo();
-    if(userEmail!=null){
+    var userid = await UserServices.getUserInfo();
+    if(userid!=null){
       return true;
     }
     return false;
